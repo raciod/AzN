@@ -1,0 +1,7 @@
+# compiled
+*.o
+main
+
+# clangd
+compile_commands.json
+.cache/
