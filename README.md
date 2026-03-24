@@ -72,8 +72,8 @@ AzN/
 
 **CLI**
 - [ ] parse `-s [IP] [text/file]` in main
-- [ ] parse `-r` in main
-- [ ] handle wrong usage and print a usage message
+- [x] parse `-r` in main
+- [x] handle wrong usage and print a usage message
 
 **Testing**
 - [ ] test text transfer on localhost
