@@ -7,13 +7,14 @@
 
 int main(int argc, char *argv[])
 {
+    int fd; // the global fd
     if (argc < 2) {
         fprintf(stderr, "Usage:\n"
                         "  Sender:   main -s [IP] [Port] [Path to file]\n"
                         "  Receiver: main -r  (Note: Run this first)\n");
     }
     if (strcmp(argv[1], "-r") == 0) {
-        receiver_listen();
+        receiver_listen(&fd);
         receiver_recieve();
 
     } else if (strcmp(argv[1], "-s") == 0) {
