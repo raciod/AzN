@@ -1,5 +1,5 @@
 #include "../include/sender.h"
-
+#include "../include/header.h"
 #include "../include/receiver.h"
 
 #include <arpa/inet.h>
@@ -59,13 +59,19 @@ int sender_connect(int *socket_fd, const char *ip)
     return 0;
 }
 
-int sender_send(int *socket_fd)
+int sender_send(int *socket_fd, char *file)
 {
+    // verifier the file and load the content 
+
+
+    // create the header
+    t_header v_header;
+    if(header_build(file,&v_header)){
+        fprintf(stderr, "header_build() failed. (%d)", errno)' 
+    }
+
     char buffer[100];
-    strncpy(buffer,
-            "hi im the sender if you receive this message, you are connected",
-            sizeof(buffer) - 1);
-    buffer[sizeof(buffer) - 1] = '\0';
+    snprintf(buffer, sizeof(buffer), "Name: %s\nTYPE: %d\nSIZE: %ld\n", v_header.name, v_header.type, v_header.size);
 
     printf("You are the sender and you want to SEND.\n");
     send(*socket_fd, buffer, strlen(buffer), 0);

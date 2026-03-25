@@ -1,5 +1,6 @@
 #include "include/receiver.h"
 #include "include/sender.h"
+#include "include/header.h"
 
 #include <arpa/inet.h>
 #include <errno.h>
@@ -12,9 +13,15 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+/*
+For now you need to give the file name and the file should be in the same directory as main, future syport of path 
+
+*/
+
 int main(int argc, char *argv[])
 {
     int fd; // the global fd
+    // the header
     if (argc < 2) {
         fprintf(stderr, "Usage:\n"
                         "  Sender:   main -s [IP] [Path to file]\n"
@@ -28,7 +35,7 @@ int main(int argc, char *argv[])
 
     } else if (strcmp(argv[1], "-s") == 0) {
         sender_connect(&fd, argv[2]);
-        sender_send(&fd);
+        sender_send(&fd, argv[3]);
         close(fd);
 
     } else if (strcmp(argv[1], "-h") == 0) {
