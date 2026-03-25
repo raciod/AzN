@@ -1,9 +1,9 @@
 #ifndef RECEIVER_H
 #define RECEIVER_H
 
-#define PORT "5001"
+#define PORT "49152"
 
 int receiver_listen(int *socket_client);
-void receiver_recieve();
+int receiver_recieve(int *socket_client);
 
 #endif

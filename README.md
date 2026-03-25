@@ -49,10 +49,10 @@ AzN/
 ## TODO
 
 **Network & Sockets**
-- [ ] create and bind a TCP socket in receiver
-- [ ] connect to target IP:port in sender
-- [ ] accept incoming connection in receiver
-- [ ] close socket properly after transfer
+- [x] create and bind a TCP socket in receiver
+- [x] connect to target IP:port in sender
+- [x] accept incoming connection in receiver
+- [x] close socket properly after transfer
 
 **Header**
 - [ ] define the header struct
