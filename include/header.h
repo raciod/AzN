@@ -11,20 +11,21 @@ the HEADER structure
     [raw bytes follow]
 */
 
-typedef enum e_type
-{
-    TYPE_FILE,
-    TYPE_TEXT
-}t_type;
+// typedef enum e_type
+// {
+//     TYPE_FILE,
+//     TYPE_TEXT
+// }t_type;
 
 typedef struct s_header
 {
     char    name[256];
-    t_type  type;
+    char    type[265];
     long    size;
 }t_header;
 
 
-int header_build(char *file, t_header *v_header); // should accespt a string (file name)
+int header_build(char *file, t_header *v_header); // should accept a string (file name)
+int header_parse(char *header, t_header *v_header);
 
-#endif
+#endif 

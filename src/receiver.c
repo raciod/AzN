@@ -1,4 +1,5 @@
 #include "../include/receiver.h"
+#include "../include/header.h"
 
 #include <arpa/inet.h>
 #include <errno.h>
@@ -74,10 +75,24 @@ int receiver_listen(int *socket_client)
 int receiver_recieve(int *socket_client)
 {
     printf("Reading request...\n");
-    char message[1024];
-    int byte_received      = recv(*socket_client, message, 1024, 0);
-    message[byte_received] = '\0';
-    printf("Message received is: \n%s", message);
+    char header_buffer[1024];
+    int byte_received = recv(*socket_client, header_buffer, 1024, 0);
+    header_buffer[byte_received] = '\0';
+    printf("[receive (sended to parser) function]:\n %s\n",header_buffer);
+    // printf("header[receiver_receive()] : if you see this this mean the header is received successfuly.\n");
+    // printf("%s\n", header_buffer);
+
+    // Parsing the recieved request
+    t_header v_header;
+    // char *header, t_header *v_header
+    header_parse(header_buffer,&v_header);
+
+    printf("header[receiver_receive()] : if you see this this mean the header is parsed successfuly.\n");
+    printf("Type: %s\n", v_header.type);
+    printf("Name: %s\n", v_header.name);
+    printf("Size: %ld\n", v_header.size);
+    //message[byte_received] = '\0';
+    //printf("Message received is: \n%s", header_buffer);
 
     printf("You are the receiver and you want to RECEIVE.\n");
     return 0;

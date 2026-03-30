@@ -12,6 +12,14 @@ Peer-to-peer file and text sharing over raw TCP sockets for Unix/Linux.
 ./main -s [IP] [text or filepath]
 ```
 
+to test it localy:
+```bash
+# Receiver (run first)
+./main -r
+
+# Sender
+./main -s 127.0.0.1 testfile.txt
+```
 ## Project Structure
 
 ```

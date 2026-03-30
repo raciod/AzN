@@ -1,5 +1,6 @@
 #include "../include/header.h"
 #include <string.h>
+#include <stdio.h>
 /*
 the HEADER structure
     TYPE:file\n
@@ -11,34 +12,42 @@ the HEADER structure
 */
 
 int header_build(char *file, t_header *v_header){
+
     strncpy(v_header->name, file, sizeof(v_header->name) - 1);
     v_header->name[sizeof(v_header->name) - 1] = '\0';
-    v_header->type = TYPE_FILE;
+
+    strncpy(v_header->type, "TYPE_FILE", sizeof(v_header->type) - 1);
+    v_header->type[sizeof(v_header->type) - 1] = '\0';
+
+    // v_header->type = TYPE_FILE;
     v_header->size = 10000;
+
+    // printf("header [header_build()]\n");
+    // printf("Type: %s\n", v_header->type);
+    // printf("Name: %s\n", v_header->name);
+    // printf("Size: %ld\n", v_header->size);
 
     return 0;
 }
 
-// write the read function
+int header_parse(char *header, t_header *v_header){  
+    // %32[^ \n] means: read up to 32 characters, stopping at a space or newline
+    // %ld means: read a long integer
+    int fields = sscanf(header, 
+                        "TYPE:%32[^\n]\nNAME:%255[^\n]\nSIZE:%ld", 
+                        v_header->type, 
+                        v_header->name, 
+                        &v_header->size);
 
-// unsigned char   *read_file(char *path, long *size)
-// {
-//     FILE            *fd;
-//     unsigned char   *buffer;
-//
-//     fd = fopen(path, "rb");
-//     if(!fd)
-//         return NULL;
-//     fseek(fd, 0, SEEK_END);
-//     *size = ftell(fd);
-//     fseek(fd, 0, SEEK_SET);
-//     buffer = malloc(*size);
-//     if(!buffer)
-//     {
-//         fclose(fd);
-//         return NULL;
-//     }
-//     fread(buffer, 1, *size, fd);
-//     fclose(fd);
-//     return buffer;
-// }
+    if (fields != 3) {
+        return 1; // Error
+    }
+
+    // printf("header[header_parse()] : if you see this this mean the header is parsed successfuly.\n");
+    // printf("Type: %s\n", v_header->type);
+    // printf("Name: %s\n", v_header->name);
+    // printf("Size: %ld\n", v_header->size);
+
+    return 0;
+}
+
