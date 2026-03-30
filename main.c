@@ -14,7 +14,7 @@
 #include <unistd.h>
 
 /*
-For now you need to give the file name and the file should be in the same directory as main, future syport of path 
+For now you need to give the file name and the file should be in the same directory as main, future support of path is comming
 
 */
 

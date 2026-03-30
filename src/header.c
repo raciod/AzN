@@ -18,14 +18,8 @@ int header_build(char *file, t_header *v_header){
 
     strncpy(v_header->type, "TYPE_FILE", sizeof(v_header->type) - 1);
     v_header->type[sizeof(v_header->type) - 1] = '\0';
-
-    // v_header->type = TYPE_FILE;
+    
     v_header->size = 10000;
-
-    // printf("header [header_build()]\n");
-    // printf("Type: %s\n", v_header->type);
-    // printf("Name: %s\n", v_header->name);
-    // printf("Size: %ld\n", v_header->size);
 
     return 0;
 }
@@ -42,11 +36,6 @@ int header_parse(char *header, t_header *v_header){
     if (fields != 3) {
         return 1; // Error
     }
-
-    // printf("header[header_parse()] : if you see this this mean the header is parsed successfuly.\n");
-    // printf("Type: %s\n", v_header->type);
-    // printf("Name: %s\n", v_header->name);
-    // printf("Size: %ld\n", v_header->size);
 
     return 0;
 }

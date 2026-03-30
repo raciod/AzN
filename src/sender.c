@@ -69,13 +69,7 @@ int sender_send(int *socket_fd, char *file)
     if(header_build(file,&v_header)){
         fprintf(stderr, "header_build() failed. (%d)", errno); 
     }
-    // printf("Extracted header[sender_send()]\n");
-    // printf("Type: %s\n", v_header.type);
-    // printf("Name: %s\n", v_header.name);
-    // printf("Size: %ld\n", v_header.size);
 
-    
-    // write the type not the 0/1 check if 0 -> TYPE_FILE if 1-> TYPE_TEXT
     char header_buffer[100];
     snprintf(header_buffer, sizeof(header_buffer), "TYPE:%s\nNAME:%s\nSIZE:%ld\n",
          v_header.type, v_header.name, v_header.size);

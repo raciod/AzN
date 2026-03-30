@@ -69,7 +69,6 @@ int receiver_listen(int *socket_client)
                 sizeof(address_buffer), 0, 0, NI_NUMERICHOST);
     printf("%s\n", address_buffer);
 
-    // printf("You are the receiver and you want to LISTEN.\n");
     return 0;
 }
 int receiver_recieve(int *socket_client)
@@ -79,8 +78,6 @@ int receiver_recieve(int *socket_client)
     int byte_received = recv(*socket_client, header_buffer, 1024, 0);
     header_buffer[byte_received] = '\0';
     printf("[receive (sended to parser) function]:\n %s\n",header_buffer);
-    // printf("header[receiver_receive()] : if you see this this mean the header is received successfuly.\n");
-    // printf("%s\n", header_buffer);
 
     // Parsing the recieved request
     t_header v_header;
@@ -91,9 +88,6 @@ int receiver_recieve(int *socket_client)
     printf("Type: %s\n", v_header.type);
     printf("Name: %s\n", v_header.name);
     printf("Size: %ld\n", v_header.size);
-    //message[byte_received] = '\0';
-    //printf("Message received is: \n%s", header_buffer);
 
-    printf("You are the receiver and you want to RECEIVE.\n");
     return 0;
 }
