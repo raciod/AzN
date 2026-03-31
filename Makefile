@@ -1,6 +1,6 @@
 CC     = gcc
 CFLAGS = -Wall -Wextra -Iinclude
-SRC    = main.c src/sender.c src/receiver.c src/header.c
+SRC = main.c src/sender.c src/receiver.c src/header.c src/transfer.c
 OBJ    = $(SRC:.c=.o)
 NAME   = main
 

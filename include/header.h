@@ -1,6 +1,6 @@
 #ifndef HEADER_H
 #define HEADER_H
-
+#include <stdio.h>
 /*
 the HEADER structure
     TYPE:file\n
@@ -25,7 +25,7 @@ typedef struct s_header
 }t_header;
 
 
-int header_build(char *file, t_header *v_header); // should accept a string (file name)
+int header_build(char *file, t_header *v_header, FILE *fptr); // should accept a string (file name)
 int header_parse(char *header, t_header *v_header);
 
 #endif 

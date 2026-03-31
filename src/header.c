@@ -1,6 +1,7 @@
 #include "../include/header.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 /*
 the HEADER structure
     TYPE:file\n
@@ -11,7 +12,7 @@ the HEADER structure
     [raw bytes follow]
 */
 
-int header_build(char *file, t_header *v_header){
+int header_build(char *file, t_header *v_header, FILE *fptr){
 
     strncpy(v_header->name, file, sizeof(v_header->name) - 1);
     v_header->name[sizeof(v_header->name) - 1] = '\0';
@@ -19,7 +20,12 @@ int header_build(char *file, t_header *v_header){
     strncpy(v_header->type, "TYPE_FILE", sizeof(v_header->type) - 1);
     v_header->type[sizeof(v_header->type) - 1] = '\0';
     
-    v_header->size = 10000;
+
+    fseek(fptr, 0, SEEK_END);
+    long size = ftell(fptr);
+    fseek(fptr, 0, SEEK_SET);
+
+    v_header->size = size;
 
     return 0;
 }

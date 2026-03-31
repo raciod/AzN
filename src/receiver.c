@@ -1,5 +1,6 @@
 #include "../include/receiver.h"
 #include "../include/header.h"
+#include "../include/transfer.h"
 
 #include <arpa/inet.h>
 #include <errno.h>
@@ -73,21 +74,27 @@ int receiver_listen(int *socket_client)
 }
 int receiver_recieve(int *socket_client)
 {
-    printf("Reading request...\n");
+    printf("Reading header...\n");
     char header_buffer[1024];
     int byte_received = recv(*socket_client, header_buffer, 1024, 0);
     header_buffer[byte_received] = '\0';
-    printf("[receive (sended to parser) function]:\n %s\n",header_buffer);
 
     // Parsing the recieved request
     t_header v_header;
     // char *header, t_header *v_header
     header_parse(header_buffer,&v_header);
 
-    printf("header[receiver_receive()] : if you see this this mean the header is parsed successfuly.\n");
+    printf("header[receiver_receive()] : if you see this this mean that you send the header and parse it successfuly.\n");
     printf("Type: %s\n", v_header.type);
     printf("Name: %s\n", v_header.name);
     printf("Size: %ld\n", v_header.size);
+
+    // receving the rest of the file 
+    printf("Reading body...\n");
+    transfer_recv(socket_client, v_header.size, v_header.name);
+    
+
+
 
     return 0;
 }

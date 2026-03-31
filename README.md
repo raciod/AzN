@@ -56,35 +56,4 @@ AzN/
 
 ## TODO
 
-**Network & Sockets**
-- [x] create and bind a TCP socket in receiver
-- [x] connect to target IP:port in sender
-- [x] accept incoming connection in receiver
-- [x] close socket properly after transfer
-
-**Header**
-- [ ] define the header struct
-- [ ] implement `header_build()`
-- [ ] implement `header_parse()`
-
-**Sender**
-- [ ] detect if argument is a file path or plain text
-- [ ] send header
-- [ ] send text over socket
-- [ ] send file in chunks with fread/send loop
-
-**Receiver**
-- [ ] receive and parse header
-- [ ] receive text and print to terminal
-- [ ] receive file and write to disk in binary mode
-
-**CLI**
-- [ ] parse `-s [IP] [text/file]` in main
-- [x] parse `-r` in main
-- [x] handle wrong usage and print a usage message
-
-**Testing**
-- [ ] test text transfer on localhost
-- [ ] test small file transfer
-- [ ] test large file transfer
-- [ ] test different file formats (pdf, image, video)
+- [ ] get the file from the user check if it exist detemine its size and divid it and send it to the receiver

@@ -1,6 +1,7 @@
 #include "../include/sender.h"
 #include "../include/header.h"
 #include "../include/receiver.h"
+#include "../include/transfer.h"
 
 #include <arpa/inet.h>
 #include <errno.h>
@@ -61,19 +62,30 @@ int sender_connect(int *socket_fd, const char *ip)
 
 int sender_send(int *socket_fd, char *file)
 {
-    // verifier the file and load the content 
-
+    // verifier the file and load the content  and check for size in bytes and send it to header builder
+    FILE *fptr;
+    fptr = fopen(file, "rb");
+    if (fptr == NULL) {
+        fprintf(stderr, "fopen() failed. (%d)\n", errno);
+        return 1;
+    }
 
     // create the header
     t_header v_header;
-    if(header_build(file,&v_header)){
+    if(header_build(file,&v_header,fptr)){
         fprintf(stderr, "header_build() failed. (%d)", errno); 
+        return 1;
     }
 
-    char header_buffer[100];
+    char header_buffer[256];
+    printf("Sending the header...\n");
     snprintf(header_buffer, sizeof(header_buffer), "TYPE:%s\nNAME:%s\nSIZE:%ld\n",
          v_header.type, v_header.name, v_header.size);
-    printf("You are the sender and you want to SEND.\n");
     send(*socket_fd, header_buffer, strlen(header_buffer), 0);
+   
+    // sending the rest of the file
+    printf("Sending the body...\n");
+    transfer_send(socket_fd, fptr);
+    
     return 0;
 }
