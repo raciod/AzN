@@ -112,7 +112,3 @@ AzN/
 └── Makefile
 
 ```
-
-Whenever you're ready, share the details for your **second** and **third** projects, and I'll generate their READMEs in the exact same format.
-
-```
